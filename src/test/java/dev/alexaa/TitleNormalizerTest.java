@@ -19,10 +19,10 @@ class TitleNormalizerTest {
 			.map(element -> StringUtils.join(element, " "));
 	}
 
-	private List<String> addFluff(String... strings) {
+	private List<String> withFluff(String... strings) {
 		return Stream
 			.concat(Stream.of(strings),
-				Stream.of("Chief", "Principal", "Lead", "Senior", "Mid", "Junior"))
+				Stream.of("Chief", "Principal", "Lead", "Senior", "Mid", "Junior", ""))
 			.collect(Collectors.toList());
 	}
 
@@ -42,7 +42,7 @@ class TitleNormalizerTest {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
 		String expected = "Accountant";
-		List<String> firstSection = addFluff("Chief", "Public", "");
+		List<String> firstSection = withFluff("Chief", "Public");
 		List<String> secondSection = of("Accountant", "Bookkeeper", "Auditor", "Clerk");
 
 		multiplySections(firstSection, secondSection)
@@ -55,7 +55,7 @@ class TitleNormalizerTest {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
 		String expected = "Software Engineer";
-		List<String> firstSection = addFluff("C#", "Java", "TypeScript", "");
+		List<String> firstSection = withFluff("C#", "Java", "TypeScript");
 		List<String> secondSection = of("Engineer", "Developer");
 
 		multiplySections(firstSection, secondSection)
@@ -68,7 +68,7 @@ class TitleNormalizerTest {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
 		String expected = "Quantity Surveyor";
-		List<String> firstSection = addFluff("Chief", "Chartered", "");
+		List<String> firstSection = withFluff("Chief", "Chartered");
 		List<String> secondSection = of("Quantity Surveyor", "Surveyor", "Estimator");
 
 		multiplySections(firstSection, secondSection)
@@ -81,7 +81,7 @@ class TitleNormalizerTest {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
 		String expected = "Architect";
-		List<String> firstSection = addFluff("Chief", "");
+		List<String> firstSection = withFluff("Chief");
 		List<String> secondSection = of("Architect", "Landscaper", "Planner");
 
 		multiplySections(firstSection, secondSection)
@@ -94,7 +94,7 @@ class TitleNormalizerTest {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
 		String expected = "Software Engineer";
-		List<String> firstSection = addFluff();
+		List<String> firstSection = withFluff();
 		List<String> secondSection = of("Engineer", "Developer");
 
 		multiplySections(firstSection, secondSection)
