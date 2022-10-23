@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static dev.alexaa.title.JobTitle.*;
-
 public class Title {
 	public final String subject;
 
@@ -16,7 +14,7 @@ public class Title {
 		subject = words.get(words.size() - 1);
 
 		titles = Stream
-			.of(SOFTWARE_ENGINEER, ARCHITECT, ACCOUNTANT, QUANTITY_SURVEYOR)
+			.of(JobTitle.values())
 			.map(title -> title.withTitle(this))
 			.collect(Collectors.toList());
 	}
