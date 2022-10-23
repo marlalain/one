@@ -39,8 +39,8 @@ public enum JobTitle {
 	private float score() {
 		float score = 0F;
 
-		if (title.emptyWithoutFluff() && equals(title.classification))
-			return 1F;
+		var matchesPossibleSubjects = equals(title.subject);
+		if (matchesPossibleSubjects) return 1F;
 
 		return score;
 	}

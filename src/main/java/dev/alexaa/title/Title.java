@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static dev.alexaa.title.JobTitle.*;
 
@@ -12,7 +11,6 @@ public class Title {
 	public final String classification;
 	public final Collection<String> tail;
 	public final String subject;
-	public final Collection<String> fluff = List.of("Chief", "Principal", "Lead", "Senior", "Mid", "Junior");
 
 	private final Collection<JobTitle> titles = List.of(
 		SOFTWARE_ENGINEER,
@@ -22,35 +20,20 @@ public class Title {
 	);
 
 	public Title(List<String> words) {
-		subject = words
-			.stream()
-			.findFirst()
-			.orElseThrow(IllegalArgumentException::new);
+		subject = words.get(words.size() - 1);
 
 		tail = words
-			.subList(1, words.size());
+			.subList(0, words.size() - 1);
 
 		classification = StringUtils
 			.join(tail, " ");
-	}
-
-	public boolean emptyWithoutFluff() {
-		String[] tail = StringUtils.split(classification, " ");
-		return Stream.of(tail).noneMatch(this::isFluff);
-	}
-
-	private boolean isFluff(String possiblyFluff) {
-		return fluff
-			.stream()
-			.anyMatch(element -> element.equals(possiblyFluff));
 	}
 
 	public String normalize() {
 		return titles
 			.stream()
 			.map(jobTitle -> jobTitle.withTitle(this))
-			.sorted(JobTitle::sort)
-			.findFirst()
+			.min(JobTitle::sort)
 			.orElseThrow(IllegalStateException::new)
 			.toString();
 	}
