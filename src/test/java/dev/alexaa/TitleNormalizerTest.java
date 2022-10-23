@@ -38,6 +38,19 @@ class TitleNormalizerTest {
 	}
 
 	@Test
+	public void fluffCase() {
+		TitleNormalizer normalizer = new TitleNormalizer();
+
+		String expected = "Software Engineer";
+		List<String> firstSection = withFluff();
+		List<String> secondSection = of("Engineer", "Developer");
+
+		multiplySections(firstSection, secondSection)
+			.map(normalizer::normalize)
+			.forEach(actual -> assertEquals(expected, actual));
+	}
+
+	@Test
 	public void accountant() {
 		TitleNormalizer normalizer = new TitleNormalizer();
 
@@ -83,19 +96,6 @@ class TitleNormalizerTest {
 		String expected = "Architect";
 		List<String> firstSection = withFluff("Chief");
 		List<String> secondSection = of("Architect", "Landscaper", "Planner");
-
-		multiplySections(firstSection, secondSection)
-			.map(normalizer::normalize)
-			.forEach(actual -> assertEquals(expected, actual));
-	}
-
-	@Test
-	public void fluffCase() {
-		TitleNormalizer normalizer = new TitleNormalizer();
-
-		String expected = "Software Engineer";
-		List<String> firstSection = withFluff();
-		List<String> secondSection = of("Engineer", "Developer");
 
 		multiplySections(firstSection, secondSection)
 			.map(normalizer::normalize)
