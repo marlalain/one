@@ -27,12 +27,6 @@ cd one
 ```
 > Task :test
 
-StringValidatorTest > emptyWithSpaces() PASSED
-
-StringValidatorTest > simpleCorrectCase() PASSED
-
-StringValidatorTest > emptyString() PASSED
-
 TitleNormalizerTest > architect() PASSED
 
 TitleNormalizerTest > simpleCase() PASSED
