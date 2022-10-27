@@ -12,8 +12,7 @@ public class Title {
 
 	public String normalize() {
 		return Arrays.stream(JobTitle.values())
-			.map(title -> title.withTitle(this))
-			.min(JobTitle::sort)
+			.min((jobTitleA, jobTitleB) -> jobTitleA.sortByTitle(jobTitleB, this))
 			.orElseThrow(IllegalStateException::new)
 			.toString();
 	}

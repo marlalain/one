@@ -21,18 +21,15 @@ public enum JobTitle {
 		this.possibleSubjects = possibleSubjects;
 	}
 
-	JobTitle withTitle(Title title) {
-		this.title = title;
-
-		return this;
-	}
-
 	@Override
 	public String toString() {
 		return this.normalizedTitle;
 	}
 
-	public int sort(JobTitle jobTitle) {
+	public int sortByTitle(JobTitle jobTitle, Title title) {
+		jobTitle.title = title;
+		this.title = title;
+
 		return Math.round(jobTitle.score() - score());
 	}
 
